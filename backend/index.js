@@ -7,6 +7,7 @@ require("dotenv").config();
 
 // Import routes
 const productRoutes = require('./routes/productRoutes');
+const newsletterRoutes = require('./routes/newsletterRoutes');
 
 //Initializing the express application
 const app = express();
@@ -34,6 +35,9 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/products', productRoutes);
+
+// Add this with other route middleware
+app.use('/subscribe', newsletterRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
