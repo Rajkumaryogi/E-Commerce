@@ -1,15 +1,23 @@
 /** @type {import('tailwindcss').Config} */
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // Add all file extensions you use
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Poppins', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
+      },
+    },
   },
   plugins: [
-  ('@tailwindcss/forms'),
-  ('@tailwindcss/typography'),
-],
+    forms,
+    typography,
+  ],
 }
-
