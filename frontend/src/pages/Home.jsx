@@ -1,28 +1,61 @@
 import { useEffect, useState } from 'react';
-import axios from '../api/axios';
-import { useCart } from '../context/CartContext';
+import axios from 'axios';
+import { motion } from 'framer-motion';
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 10
+    }
+  }
+};
+
+const loadingVariants = {
+  animate: {
+    scale: [1, 1.1, 1],
+    transition: {
+      repeat: Infinity,
+      duration: 1.5,
+      ease: 'easeInOut'
+    }
+  }
+};
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true);
-        const response = await axios.get('/api/products');
-        
-        // Check if response.data exists and is an array
-        if (response.data && Array.isArray(response.data)) {
-          setProducts(response.data);
-        } else {
-          throw new Error('Invalid data format received');
-        }
+        const response = await axios.get('http://localhost:3000/api/products');
+        setProducts(response.data);
       } catch (err) {
-        console.error('Error fetching products:', err);
-        setError(err.message || 'Failed to fetch products');
+        setError(err.message);
+        console.error('API Error:', {
+          message: err.message,
+          code: err.code,
+          config: err.config,
+          response: err.response
+        });
       } finally {
         setLoading(false);
       }
@@ -31,61 +64,74 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="font-mono p-8 flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
+  if (loading) return (
+    <div className="flex items-center justify-center h-64">
+      <motion.div
+        variants={loadingVariants}
+        animate="animate"
+        className="text-2xl font-semibold text-gray-600"
+      >
+        Loading...
+      </motion.div>
+    </div>
+  );
 
-  if (error) {
-    return (
-      <div className="font-mono p-8 text-center text-red-500">
-        <p>Error: {error}</p>
-        <button 
-          onClick={() => window.location.reload()} 
-          className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Retry
-        </button>
-      </div>
-    );
-  }
-
-  if (products.length === 0) {
-    return (
-      <div className="font-mono p-8 text-center">
-        <p>No products available</p>
-      </div>
-    );
-  }
+  if (error) return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="p-8 text-center text-red-500"
+    >
+      Error: {error}
+    </motion.div>
+  );
 
   return (
-    <div className="font-mono p-8">
-      <h2 className="text-2xl font-bold mb-6">Products</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map(prod => (
-          <div key={prod._id} className="border rounded-lg shadow-md p-4 flex flex-col items-center hover:shadow-lg transition-shadow">
-            <img 
-              src={prod.imageUrl} 
-              alt={prod.name} 
-              className="w-32 h-32 object-cover mb-4 rounded"
-              onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/150'; // Fallback image
-              }}
-            />
-            <h4 className="text-lg font-semibold text-center">{prod.name}</h4>
-            <p className="text-gray-700 mb-2">${prod.price.toFixed(2)}</p>
-            <button
-              onClick={() => addToCart(prod)}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-            >
-              Add to cart
-            </button>
-          </div>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="p-8"
+    >
+      <motion.h2 
+        className="text-2xl font-bold mb-6"
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        Products
+      </motion.h2>
+      
+      <motion.div 
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+        variants={containerVariants}
+      >
+        {products.map(product => (
+          <motion.div
+            key={product._id}
+            variants={itemVariants}
+            whileHover={{ 
+              y: -5,
+              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
+              transition: { duration: 0.2 }
+            }}
+            className="border rounded-lg shadow-md p-4 bg-white"
+          >
+            <h3 className="text-lg font-semibold">{product.name}</h3>
+            <p className="text-gray-600">${product.price}</p>
+            {product.imageUrl && (
+              <motion.img
+                src={product.imageUrl}
+                alt={product.name}
+                className="w-full h-48 object-cover mt-2 rounded"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              />
+            )}
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

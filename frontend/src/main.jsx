@@ -18,7 +18,7 @@ import { CartProvider } from './context/CartContext';
 import './index.css'; // 👉 Add this line!
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <AuthProvider>
       <CartProvider>
         <BrowserRouter>
@@ -26,5 +26,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </BrowserRouter>
       </CartProvider>
     </AuthProvider>
-  // </React.StrictMode>
+   </React.StrictMode>
 );
