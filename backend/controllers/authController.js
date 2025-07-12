@@ -1,105 +1,84 @@
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
-// Register a new user
-exports.register = async (req, res) => {
+// @desc    Register a new user
+// @route   POST /api/register
+const registerUser = async (req, res) => {
+  const { username, email, password } = req.body;
+  console.warn(username, email, password);
+  
+
   try {
-    const { email, password, name } = req.body;
-
-    // Check if user exists
-    let user = await User.findOne({ email });
-    if (user) {
+    const userExists = await User.findOne({ email });
+    if (userExists) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // Create new user
-    user = new User({
+    const user = await User.create({
+      username,
       email,
       password,
-      name
     });
+    console.log('New user created:', user);
+    
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
+    const token = generateToken(user._id);
 
-    await user.save();
-
-    // Create and return JWT token
-    const payload = {
-      user: {
-        id: user.id
-      }
-    };
-
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: '1h' },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
-  } catch (err) {
-    console.log('Register request body:', req.body);
-    console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      token,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 };
 
-// Login user
-exports.login = async (req, res) => {
+// @desc    Authenticate user & get token
+// @route   POST /api/login
+const loginUser = async (req, res) => {
+  
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
+    const user = await User.findOne({ email }).populate('cart.product');
 
-    // Check if user exists
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+    if (user && (await user.comparePassword(password))) {
+      const token = generateToken(user._id);
+
+      res.json({
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        cart: user.cart,
+        token,
+      });
+    } else {
+      res.status(401).json({ message: 'Invalid email or password' });
     }
-
-    // Check password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    // Create and return JWT token
-    const payload = {
-      user: {
-        id: user.id
-      }
-    };
-
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: '1h' },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
-  } catch (err) {
-
-    console.log('Register request body:', req.body);
-    console.error(err.message);
-    res.status(500).send('Server error');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 };
 
-// Logout user
-exports.logout = (req, res) => {
-  req.logout();
+// @desc    Logout user
+// @route   POST /api/logout
+const logoutUser = (req, res) => {
   res.json({ message: 'Logged out successfully' });
 };
 
-// Check authentication status
-exports.checkAuth = (req, res) => {
-  if (req.isAuthenticated()) {
-    return res.json({ authenticated: true, user: req.user });
-  }
-  res.json({ authenticated: false });
+// Generate JWT
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET || 'your_jwt_secret', {
+    expiresIn: '24h',
+  });
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
+  logoutUser,
 };

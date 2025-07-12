@@ -2,17 +2,26 @@ import { useState } from 'react';
 import axios from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom'; // Import Link for navigation
+import { useEffect } from 'react';
 
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const token= localStorage.getItem('token');
+
+  useEffect(()=>{
+    if (token) {
+      login(token);
+      window.location.href = '/'; // Redirect to home page if already logged in
+    }
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await axios.post('/auth/login', form);
+      const res = await axios.post('/api/auth/login', form);
       login(res.data.token);
       alert('Logged in successfully!');
     } catch (error) {

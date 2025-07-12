@@ -5,11 +5,12 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import AdminDashboard from './pages/AdminDashboard';
 import Cart from './pages/Cart';
 import Footer from './components/footer';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Collection from './pages/Collection';
+import ProductDetails from './components/ProductDetails';
 
 export default function App() {
   return (
@@ -31,12 +32,14 @@ export default function App() {
       />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/collection" element={<Collection />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/products/:productId" element={<ProductDetails />} />
+        {/* Add more routes as needed */}
       </Routes>
       <Footer />
     </>

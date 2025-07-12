@@ -1,31 +1,29 @@
 import { useState } from 'react';
 import axios from '../api/axios';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Assuming you have an auth context
+import { Link} from 'react-router-dom';
 
 export default function Register() {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ username: '', email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const { login } = useAuth(); // Assuming your auth context has a login function
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
       // 1. Register the user
-      const response = await axios.post('/auth/register', form);
+      const response = await axios.post('/api/auth/register', form);
+      console.warn('Registration response:', response);
+      
       
       // 2. Automatically log in the user
       // Assuming the response contains tokens or user data
-      const { token, user } = response.data;
+      const { token} = response.data;
       
       // Store the token and user data (implementation depends on your auth system)
       localStorage.setItem('token', token);
-      login(user); // Update auth context
       
       // 3. Redirect to dashboard or home page
-      navigate('/dashboard'); // or wherever you want to redirect
+      window.location.href = '/'; // or wherever you want to redirect
       
     } catch (error) {
       alert(error.response?.data?.message || 'Registration failed');
@@ -40,13 +38,13 @@ export default function Register() {
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Create Account</h2>
         
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 mb-2">Full Name</label>
+          <label htmlFor="username" className="block text-gray-700 mb-2">Full Name</label>
           <input
             id="name"
             type="text"
             placeholder="John Doe"
             className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={e => setForm({ ...form, name: e.target.value })}
+            onChange={e => setForm({ ...form, username: e.target.value })}
             required
           />
         </div>

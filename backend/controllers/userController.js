@@ -1,49 +1,64 @@
 const User = require('../models/User');
 
-// Get user by ID
-exports.getUser = async (req, res) => {
+exports.getMe = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id).select('-password');
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.json(user);
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user
+      }
+    });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    next(err);
   }
 };
 
-// Update user
-exports.updateUser = async (req, res) => {
+exports.updateMe = async (req, res, next) => {
   try {
-    const { name, email, address } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user: updatedUser
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.deleteMe = async (req, res, next) => {
+  try {
+    await User.findByIdAndUpdate(req.user.id, { isActive: false });
     
-    const userFields = {};
-    if (name) userFields.name = name;
-    if (email) userFields.email = email;
-    if (address) userFields.address = address;
-
-    const user = await User.findByIdAndUpdate(
-      req.params.id,
-      { $set: userFields },
-      { new: true }
-    ).select('-password');
-
-    res.json(user);
+    res.status(204).json({
+      status: 'success',
+      data: null
+    });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    next(err);
   }
 };
 
-// Delete user
-exports.deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res, next) => {
   try {
-    await User.findByIdAndRemove(req.params.id);
-    res.json({ message: 'User deleted' });
+    await User.findByIdAndDelete(req.params.id);
+    
+    res.status(204).json({
+      status: 'success',
+      data: null
+    });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    next(err);
   }
 };
+// Add other controller methods as needed...
