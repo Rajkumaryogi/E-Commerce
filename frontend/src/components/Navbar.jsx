@@ -90,7 +90,7 @@ const Navbar = () => {
                     <button
                       onClick={() => {
                         localStorage.removeItem("token");
-                        window.location.reload();
+                        window.location.href = '/'; // Redirect to login page on logout
                       }}
                       className="w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50"
                     >

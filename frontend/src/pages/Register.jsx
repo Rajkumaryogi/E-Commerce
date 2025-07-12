@@ -76,7 +76,7 @@ export default function Register() {
 
         <button 
           type="submit" 
-          className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 mb-4 flex justify-center items-center"
+          className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center transition duration-300"
           disabled={isLoading}
         >
           {isLoading ? (

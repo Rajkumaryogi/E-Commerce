@@ -152,7 +152,7 @@ const Collection = () => {
             key={product._id}
             variants={itemVariants}
             whileHover={{ y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}
-            className="bg-gray-500 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            className="bg-gray-100 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
           >
             <div className="relative h-64">
               <motion.img

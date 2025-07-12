@@ -26,7 +26,7 @@ export default function Cart() {
           console.warn("No cart found");
         }
       } catch (err) {
-        setError("Failed to load cart. Please try again.");
+        setError("Login require to load cart.");
         console.error("Error fetching cart:", err);
       } finally {
         setLoading(false);
