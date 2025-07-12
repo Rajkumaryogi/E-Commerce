@@ -2,20 +2,25 @@ const express = require('express');
 const router = express.Router();
 const { getAllProducts, getProductById } = require('../controllers/productController');
 const  isAdminMiddleware = require('../middleware/isAdminMiddleware');
-const { addProduct, updateProduct, deleteProduct,  } = require('../controllers/adminProductController');
+const { getAllAdminProducts ,addProduct, updateProduct, deleteProduct, updateProductVisibility,  } = require('../controllers/adminProductController');
 
 //get all products
 router.get('/', getAllProducts);
 
-// Correct route with proper parameter name
-router.get('/:productId', getProductById);
+
+// getAllAdminProducts
+router.get('/admin',isAdminMiddleware.isAdmin, getAllAdminProducts);
 
 // admin routes to manage products like add, update, delete can be added here
-router.post('/add/:productId', isAdminMiddleware.isAdmin, addProduct);
+router.post('/admin/add', isAdminMiddleware.isAdmin, addProduct);
 // Update product by ID
-router.put('/update/:productId', isAdminMiddleware.isAdmin, updateProduct);
+router.put('/admin/update/:productId', isAdminMiddleware.isAdmin, updateProduct);
 // Delete product by ID
-router.delete('/delete/:productId', isAdminMiddleware.isAdmin, deleteProduct);
+router.delete('/admin/delete/:productId', isAdminMiddleware.isAdmin, deleteProduct);
 
+// Admin routes patch to toggle product visibility
+router.patch('/admin/:productId/visibility', isAdminMiddleware.isAdmin, updateProductVisibility);
+// Correct route with proper parameter name
+router.get("/:productId", getProductById);
 
 module.exports = router;

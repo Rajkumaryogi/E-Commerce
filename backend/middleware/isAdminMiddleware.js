@@ -3,6 +3,7 @@ const AdminUser = require('../models/AdminUser');
 
 const isAdmin = async (req, res, next) => {
   let token;
+console.warn("rtest");
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {

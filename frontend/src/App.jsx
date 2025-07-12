@@ -13,6 +13,8 @@ import Collection from './pages/Collection';
 import ProductDetails from './components/ProductDetails';
 import AdminLogin from './pages/AdminLogin'; // Importing AdminLogin for admin authentication
 import AdminDashboard from './admin/AdminDashboard'; 
+import AddProduct from './admin/AddProduct'; // Importing AddProduct for admin product management
+import EditProduct from './admin/EditProduct'; // Importing EditProduct for editing products
 
 export default function App() {
   return (
@@ -43,6 +45,9 @@ export default function App() {
         <Route path="/products/:productId" element={<ProductDetails />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/products/add" element={<AddProduct />} />
+        <Route path="/admin/products/edit/:productId" element={<EditProduct />} />
+
 
         {/* Add more routes as needed */}
       </Routes>

@@ -1,5 +1,30 @@
 const Product = require('../models/Product');
 
+// to get all products
+const getAllAdminProducts = async (req, res) => {
+    console.warn("rtest");
+    try {
+        
+        const products = await Product.find();
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// patch to toggle product visibility
+const updateProductVisibility = async (productId, visibility) => {
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(
+            productId,
+            { visibility },
+            { new: true }
+        );
+        return updatedProduct;
+    } catch (err) {
+        throw new Error('Failed to update product visibility: ' + err.message);
+    }
+};
 
 // Additional product-related functions can be added here
 const addProduct = async (req, res) => {
@@ -38,7 +63,8 @@ const updateProduct = async (req, res) => {
     }
 }
 module.exports = {
-    
+    getAllAdminProducts,
+    updateProductVisibility,
     addProduct,
     deleteProduct,
     updateProduct,
