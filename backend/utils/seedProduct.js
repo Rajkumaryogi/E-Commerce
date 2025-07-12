@@ -17,7 +17,7 @@ const products = [
   },
   {
     order: 2,
-    name: "Blue Denim Jacket",
+    name: "black Denim Jacket",
     visibility: true,
     description: "Stylish and durable denim jacket for everyday wear.",
     price: 1799,

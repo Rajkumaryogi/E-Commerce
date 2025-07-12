@@ -85,7 +85,7 @@ const Subscribe = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center transition duration-300 ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:opacity-90'}`}
+              className={`w-full bg-gradient-to-r from-zinc-500 to-zinc-200 text-black font-medium py-3 px-6 rounded-lg flex items-center justify-center transition duration-300 ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:opacity-90'}`}
             >
               {isLoading ? (
                 <>

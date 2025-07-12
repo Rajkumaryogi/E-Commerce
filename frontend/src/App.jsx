@@ -15,6 +15,8 @@ import AdminLogin from './pages/AdminLogin'; // Importing AdminLogin for admin a
 import AdminDashboard from './admin/AdminDashboard'; 
 import AddProduct from './admin/AddProduct'; // Importing AddProduct for admin product management
 import EditProduct from './admin/EditProduct'; // Importing EditProduct for editing products
+import ForgotPassword from './pages/ForgotPassword'
+// import ResetPassword from './pages/ResetPassword';
 
 export default function App() {
   return (
@@ -47,6 +49,10 @@ export default function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/products/add" element={<AddProduct />} />
         <Route path="/admin/products/edit/:productId" element={<EditProduct />} />
+
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        {/* <Route path="/admin/reset-password/:token" element={<ResetPassword />} /> */}
+        
 
 
         {/* Add more routes as needed */}

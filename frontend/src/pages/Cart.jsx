@@ -89,7 +89,7 @@ export default function Cart() {
         <div className="text-2xl font-semibold mb-4">Your cart is empty</div>
         <Link 
           to="/collection" 
-          className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
+          className="bg-black text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
         >
           Continue Shopping
         </Link>
@@ -164,7 +164,7 @@ export default function Cart() {
                       
                       <Link
                         to={`/products/${product._id}`}
-                        className="flex items-center px-3 py-2 text-indigo-600 hover:text-indigo-800 border border-indigo-600 hover:bg-indigo-50 rounded-md transition"
+                        className="flex items-center px-3 py-2 text-black hover:text-black border border-black hover:bg-indigo-50 rounded-md transition"
                       >
                         <FaEye className="mr-2" />
                         <span className="text-sm">View Details</span>
@@ -193,7 +193,7 @@ export default function Cart() {
             <div className="mt-6">
               <Link
                 to="/checkout"
-                className="block w-full text-center bg-indigo-600 border border-transparent rounded-md py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="block w-full text-center bg-black border border-transparent rounded-md py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Proceed to Checkout
               </Link>
@@ -202,7 +202,7 @@ export default function Cart() {
             <div className="mt-4 flex justify-center">
               <Link
                 to="/collection"
-                className="text-indigo-600 hover:text-indigo-500 text-sm font-medium"
+                className="text-black hover:text-indigo-500 text-sm font-medium"
               >
                 Continue Shopping
               </Link>

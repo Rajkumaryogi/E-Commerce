@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaShoppingCart, FaHeart, FaStar, FaRegStar, FaChevronLeft, FaChevronRight, FaMinus, FaPlus } from 'react-icons/fa';
 import { addToCart } from '../services/cartService';
+import { toast } from 'react-toastify';
 import API from '../api/axios';
 
 const ProductDetails = () => {
@@ -33,7 +34,7 @@ const ProductDetails = () => {
   const handleAddToCart = async () => {
     try {
       await addToCart(productId, quantity);
-      alert(`${quantity} ${product.name} added to cart!`);
+      toast.success(`${quantity} ${product.name} added to cart!`);
     } catch (err) {
       console.error('Error adding to cart:', err);
       setError('Failed to add item to cart. Please try again.');
@@ -70,7 +71,7 @@ const ProductDetails = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-red-500 text-xl">{error}</div>
-        <Link to="/collection" className="ml-4 text-indigo-600 hover:text-indigo-800">
+        <Link to="/collection" className="ml-4 text-black hover:text-black">
           Back to Collection
         </Link>
       </div>
@@ -95,13 +96,13 @@ const ProductDetails = () => {
         <nav className="flex mb-6" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li>
-              <Link to="/" className="text-indigo-600 hover:text-indigo-800">
+              <Link to="/" className="text-black hover:text-black">
                 Home
               </Link>
             </li>
             <li>
               <span className="mx-2 text-gray-400">/</span>
-              <Link to="/collection" className="text-indigo-600 hover:text-indigo-800">
+              <Link to="/collection" className="text-black hover:text-black">
                 Collection
               </Link>
             </li>
@@ -121,7 +122,7 @@ const ProductDetails = () => {
                 <img
                   src={product.imageUrl || "https://via.placeholder.com/600"}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full "
                 />
                 
                 {/* Navigation Arrows */}
@@ -241,7 +242,7 @@ const ProductDetails = () => {
                   <button
                     onClick={handleAddToCart}
                     disabled={product.stock <= 0}
-                    className={`flex items-center justify-center px-6 py-3 rounded-md ${product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                    className={`flex items-center justify-center px-6 py-3 rounded-md ${product.stock > 0 ? 'bg-black hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                   >
                     <FaShoppingCart className="mr-2" />
                     Add to Cart

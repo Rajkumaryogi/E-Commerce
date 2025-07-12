@@ -21,13 +21,13 @@ const Footer = () => {
               Your premier destination for trendy and comfortable clothing since 2023.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/raj.yogi.1811" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition">
+              <a href="https://www.facebook.com/raj.yogi.1811" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-black-500 transition">
                 <FaFacebook size={20} />
               </a>
               <a href="https://www.instagram.com/raj__yogii/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition">
                 <FaInstagram size={20} />
               </a>
-              <a href="https://x.com/rajkumar6777y" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition">
+              <a href="https://x.com/rajkumar6777y" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-black-400 transition">
                 <FaTwitter size={20} />
               </a>
               <a href="https://www.youtube.com/channel/UC5xLJOFefyvaL_cjLcvB_QQ" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-500 transition">
@@ -69,32 +69,32 @@ const Footer = () => {
               <p>Email: info@chlothzy.com</p>
               <p>Phone: (123) 456-7890</p>
             </address>
-            <a href="/admin/login" className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center">Admin Login</a>
+            <a href="/admin/login" className="w-full bg-gradient-to-r from-zinc-500 to-zinc-200 text-black font-medium py-3 px-6 rounded-lg flex items-center justify-center">Admin Login</a>
           </div>
         </div>
 
         {/* Features Bar */}
-        <div className="bg-gray-700 rounded-lg p-4 mb-8">
+        <div className="bg-gray-300 rounded-lg p-4 mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="flex items-center space-x-2">
               <MdOutlineLocalShipping size={24} className="text-indigo-400" />
               <div>
                 <h4 className="font-semibold">Free Shipping</h4>
-                <p className="text-sm text-gray-300">On orders over $50</p>
+                <p className="text-sm text-black">On orders over $50</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
               <MdPayment size={24} className="text-indigo-400" />
               <div>
                 <h4 className="font-semibold">Secure Payment</h4>
-                <p className="text-sm text-gray-300">100% protected</p>
+                <p className="text-sm text-black">100% protected</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
               <MdSupportAgent size={24} className="text-indigo-400" />
               <div>
                 <h4 className="font-semibold">24/7 Support</h4>
-                <p className="text-sm text-gray-300">Dedicated support</p>
+                <p className="text-sm text-black">Dedicated support</p>
               </div>
             </div>
           </div>

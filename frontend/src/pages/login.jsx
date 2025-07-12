@@ -3,6 +3,8 @@ import axios from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -23,9 +25,9 @@ export default function Login() {
     try {
       const res = await axios.post('/api/auth/login', form);
       login(res.data.token);
-      alert('Logged in successfully!');
+      toast.success('Logged in successfully!');
     } catch (error) {
-      alert(error.response?.data?.message || 'Login failed');
+      toast.error(error.response?.data?.message || 'Login failed');
     } finally {
       setIsLoading(false);
     }
@@ -42,7 +44,7 @@ export default function Login() {
             id="email"
             type="email"
             placeholder="your@email.com"
-            className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-black-500"
             onChange={e => setForm({ ...form, email: e.target.value })}
             required
           />
@@ -54,7 +56,7 @@ export default function Login() {
             id="password"
             type="password"
             placeholder="••••••••"
-            className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-black-500"
             onChange={e => setForm({ ...form, password: e.target.value })}
             required
           />
@@ -62,7 +64,7 @@ export default function Login() {
 
         <button 
           type="submit" 
-          className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center transition duration-300"
+          className="w-full bg-gradient-to-r from-zinc-500 to-zinc-200 text-black font-medium py-3 px-6 rounded-lg flex items-center justify-center transition duration-300"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -88,7 +90,7 @@ export default function Login() {
         </Link>
 
         <div className="text-center mt-6">
-          <Link to="/forgot-password" className="text-blue-600 hover:underline">
+          <Link to="/forgot-password" className="text-black-600 hover:underline">
             Forgot password?
           </Link>
         </div>

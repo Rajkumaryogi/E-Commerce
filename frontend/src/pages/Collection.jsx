@@ -133,7 +133,7 @@ const Collection = () => {
             whileTap={{ scale: 0.95 }}
             className={`px-4 py-2 rounded-full text-sm font-medium ${
               activeFilter === f.id
-                ? 'bg-indigo-600 text-white'
+                ? 'bg-black text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -195,7 +195,7 @@ const Collection = () => {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg text-sm font-medium"
+                className="w-full mt-4 bg-black text-white py-2 rounded-lg text-sm font-medium"
               >
                 Add to Cart
               </motion.button>

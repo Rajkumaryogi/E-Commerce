@@ -556,7 +556,7 @@ video {
   border-radius: 0.5rem;
 }
 
-.bg-blue-500 {
+.bg-black-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
@@ -604,7 +604,7 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-blue-500 {
+.text-black-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
@@ -617,7 +617,7 @@ video {
   transition-duration: 150ms;
 }
 
-.hover\:bg-blue-600:hover {
+.hover\:bg-black-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }

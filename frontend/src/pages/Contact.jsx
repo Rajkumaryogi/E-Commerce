@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const Contact = () => {
@@ -29,7 +32,7 @@ const Contact = () => {
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
+    toast.success('Thank you for your message! We will get back to you soon.');
     setFormData({
       firstName: '',
       lastName: '',
@@ -88,11 +91,11 @@ const Contact = () => {
               className="flex items-start gap-4"
             >
               <div className="p-2 bg-indigo-100 rounded-full">
-                <FaEnvelope className="text-indigo-600 text-lg" />
+                <FaEnvelope className="text-black text-lg" />
               </div>
               <div>
                 <h3 className="font-medium text-gray-900">Email</h3>
-                <a href="mailto:support@chlothzy.com" className="text-indigo-600 hover:underline">
+                <a href="mailto:support@chlothzy.com" className="text-black hover:underline">
                   support@chlothzy.com
                 </a>
               </div>
@@ -102,11 +105,11 @@ const Contact = () => {
               className="flex items-start gap-4"
             >
               <div className="p-2 bg-indigo-100 rounded-full">
-                <FaPhone className="text-indigo-600 text-lg" />
+                <FaPhone className="text-black text-lg" />
               </div>
               <div>
                 <h3 className="font-medium text-gray-900">Phone</h3>
-                <a href="tel:+1234567890" className="text-indigo-600 hover:underline">
+                <a href="tel:+1234567890" className="text-black hover:underline">
                   (123) 456-7890
                 </a>
               </div>
@@ -116,7 +119,7 @@ const Contact = () => {
               className="flex items-start gap-4"
             >
               <div className="p-2 bg-indigo-100 rounded-full">
-                <FaMapMarkerAlt className="text-indigo-600 text-lg" />
+                <FaMapMarkerAlt className="text-black text-lg" />
               </div>
               <div>
                 <h3 className="font-medium text-gray-900">Address</h3>
@@ -133,7 +136,7 @@ const Contact = () => {
             className="bg-white rounded-xl shadow-2xl p-8 border border-gray-100"
           >
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <FaPaperPlane className="text-indigo-600" />
+              <FaPaperPlane className="text-black" />
               Send us a message
             </h2>
             <form onSubmit={handleSubmit}>
@@ -200,7 +203,7 @@ const Contact = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={isSubmitting}
-                  className={`w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 ${
+                  className={`w-full bg-gradient-to-r from-zinc-500 to-zinc-200 text-black font-medium py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 ${
                     isSubmitting ? 'opacity-80' : 'hover:shadow-lg'
                   }`}
                 >
@@ -238,19 +241,19 @@ const Contact = () => {
               title: "Customer Support",
               email: "support@chlothzy.com",
               description: "For order inquiries, returns, and general questions",
-              icon: <FaEnvelope className="text-indigo-600 text-xl" />
+              icon: <FaEnvelope className="text-black text-xl" />
             },
             {
               title: "Wholesale Inquiries",
               email: "wholesale@chlothzy.com",
               description: "For bulk orders and partnership opportunities",
-              icon: <FaPhone className="text-indigo-600 text-xl" />
+              icon: <FaPhone className="text-black text-xl" />
             },
             {
               title: "Press & Media",
               email: "press@chlothzy.com",
               description: "For media inquiries and collaborations",
-              icon: <FaMapMarkerAlt className="text-indigo-600 text-xl" />
+              icon: <FaMapMarkerAlt className="text-black text-xl" />
             }
           ].map((department, index) => (
             <motion.div 
@@ -266,7 +269,7 @@ const Contact = () => {
               </div>
               <a 
                 href={`mailto:${department.email}`} 
-                className="text-indigo-600 hover:underline block mb-3 font-medium"
+                className="text-black hover:underline block mb-3 font-medium"
               >
                 {department.email}
               </a>

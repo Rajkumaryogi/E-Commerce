@@ -164,7 +164,7 @@ const Collection = () => {
                   className="absolute h-full w-full object-cover hover:scale-105 transition-transform"
                 />
                 {product.isNew && (
-                  <span className="absolute top-2 right-2 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  <span className="absolute top-2 right-2 bg-black text-white text-xs font-bold px-2 py-1 rounded-full">
                     NEW
                   </span>
                 )}
@@ -172,7 +172,7 @@ const Collection = () => {
             </Link>
             <div className="p-4">
               <div className="flex justify-between items-start mb-2">
-                <Link to={`/product/${product._id}`} className="font-semibold text-gray-900 hover:text-indigo-600">
+                <Link to={`/product/${product._id}`} className="font-semibold text-gray-900 hover:text-black">
                   {product.name}
                 </Link>
                 <span className="font-bold text-gray-900">${product.price}</span>
@@ -187,7 +187,7 @@ const Collection = () => {
               </div>
               <button
                 onClick={() => handleAddToCart(product)}
-                className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+                className="w-full bg-black text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors"
               >
                 Add to Cart
               </button>

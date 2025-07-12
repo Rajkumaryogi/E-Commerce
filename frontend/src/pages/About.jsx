@@ -58,7 +58,7 @@ const About = () => {
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300"
+              className="bg-black hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300"
             >
               Shop Now
             </motion.button>
@@ -115,7 +115,7 @@ const About = () => {
           variants={itemVariants}
           whileHover={{ y: -5 }}
         >
-          <div className="text-indigo-600 mb-4">
+          <div className="text-black mb-4">
             <FaLeaf size={32} />
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-3">Sustainable Fashion</h3>
@@ -130,7 +130,7 @@ const About = () => {
           variants={itemVariants}
           whileHover={{ y: -5 }}
         >
-          <div className="text-indigo-600 mb-4">
+          <div className="text-black mb-4">
             <FaHandshake size={32} />
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-3">Customer First</h3>
@@ -145,7 +145,7 @@ const About = () => {
           variants={itemVariants}
           whileHover={{ y: -5 }}
         >
-          <div className="text-indigo-600 mb-4">
+          <div className="text-black mb-4">
             <FaRocket size={32} />
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-3">Innovative Design</h3>
