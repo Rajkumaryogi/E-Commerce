@@ -67,13 +67,13 @@ const Collection = () => {
         results.sort((a, b) => b.price - a.price);
         break;
       case 'rating':
-        results.sort((a, b) => b.rating - a.rating);
+        results.sort((a, b) => (b.rating || 0) - (a.rating || 0));
         break;
       case 'newest':
         results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         break;
       default: // 'featured'
-        results.sort((a, b) => b.isFeatured - a.isFeatured);
+        results.sort((a, b) => (b.isFeatured || 0) - (a.isFeatured || 0));
     }
 
     setFilteredProducts(results);
@@ -84,7 +84,7 @@ const Collection = () => {
       id: product._id,
       name: product.name,
       price: product.price,
-      image: product.images[0],
+      image: product.imageUrl || product.images?.[0], // Handle both imageUrl and images array
       quantity: 1
     });
   };
@@ -159,7 +159,7 @@ const Collection = () => {
             <Link to={`/product/${product._id}`}>
               <div className="relative pb-[120%] overflow-hidden">
                 <img
-                  src={product.images[0]}
+                  src={product.imageUrl || product.images?.[0] || "https://via.placeholder.com/300"}
                   alt={product.name}
                   className="absolute h-full w-full object-cover hover:scale-105 transition-transform"
                 />
@@ -180,10 +180,10 @@ const Collection = () => {
               <div className="flex items-center mb-3">
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
-                    <FaStar key={i} className={i < product.rating ? 'fill-current' : 'fill-gray-300'} />
+                    <FaStar key={i} className={i < (product.rating || 0) ? 'fill-current' : 'fill-gray-300'} />
                   ))}
                 </div>
-                <span className="text-gray-500 text-sm ml-2">({product.reviewCount})</span>
+                <span className="text-gray-500 text-sm ml-2">({product.reviewCount || 0})</span>
               </div>
               <button
                 onClick={() => handleAddToCart(product)}

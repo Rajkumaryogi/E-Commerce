@@ -5,6 +5,7 @@ const cors = require('cors');
 require("dotenv").config();
 const morgan = require('morgan');
 
+
 const app = express();
 
 // Database connection
@@ -15,6 +16,8 @@ const productRoutes = require('./routes/productRoutes');
 const newsletterRoutes = require('./routes/newsletterRoutes');
 const authRoutes = require('./routes/authRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+// const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 
 // Enhanced CORS configuration
@@ -45,6 +48,8 @@ app.use('/api/products', productRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
+// app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

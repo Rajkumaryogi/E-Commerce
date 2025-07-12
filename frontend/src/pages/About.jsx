@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaLeaf, FaHandshake, FaRocket } from 'react-icons/fa';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import aboutHero from '../assets/image.png'; // Replace with your image
 

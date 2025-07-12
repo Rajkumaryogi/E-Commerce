@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({

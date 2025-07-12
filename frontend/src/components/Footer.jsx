@@ -21,16 +21,16 @@ const Footer = () => {
               Your premier destination for trendy and comfortable clothing since 2023.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition">
+              <a href="https://www.facebook.com/raj.yogi.1811" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition">
                 <FaFacebook size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-pink-500 transition">
+              <a href="https://www.instagram.com/raj__yogii/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition">
                 <FaInstagram size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition">
+              <a href="https://x.com/rajkumar6777y" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition">
                 <FaTwitter size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-red-500 transition">
+              <a href="https://www.youtube.com/channel/UC5xLJOFefyvaL_cjLcvB_QQ" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-500 transition">
                 <FaYoutube size={20} />
               </a>
             </div>
@@ -41,10 +41,10 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><a href="/" className="text-gray-400 hover:text-black transition">Home</a></li>
-              <li><a href="/products" className="text-gray-400 hover:text-black transition">Shop</a></li>
+              <li><a href="/collection" className="text-gray-400 hover:text-black transition">Shop</a></li>
               <li><a href="/about" className="text-gray-400 hover:text-black transition">About Us</a></li>
               <li><a href="/contact" className="text-gray-400 hover:text-black transition">Contact</a></li>
-              <li><a href="/blog" className="text-gray-400 hover:text-black transition">Blog</a></li>
+              <li><a href="/collection" className="text-gray-400 hover:text-black transition">Blog</a></li>
             </ul>
           </div>
 
