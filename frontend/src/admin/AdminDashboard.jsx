@@ -15,7 +15,7 @@ export default function AdminProducts() {
     const fetchProducts = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
-        navigate('/admin/login');
+        navigate('/admin');
         return;
       }
 

@@ -25,7 +25,7 @@ export default function Login() {
       const res = await axios.post('/api/admin/forgot-password', form);
       console.log(res.data);
       toast.success('Email sent Successfully : Check your email!');
-      window.location.href = '/admin/login'
+      window.location.href = '/admin'
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login failed');
     } finally {
@@ -71,7 +71,7 @@ export default function Login() {
         <div className="text-center text-gray-600 mb-4">- OR -</div>
 
         <Link 
-          to="/admin/login" 
+          to="/admin" 
           className="w-full block text-center bg-gray-100 text-gray-800 py-3 px-4 rounded-lg hover:bg-gray-200 transition duration-200"
         >
           Login

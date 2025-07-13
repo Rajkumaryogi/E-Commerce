@@ -1,131 +1,123 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ResetPassword = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [isValidToken, setIsValidToken] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [tokenError, setTokenError] = useState('');
-  const { token } = useParams();
-  const navigate = useNavigate();
+ const [password, setPassword] = useState('');
+ const [confirmPassword, setConfirmPassword] = useState('');
+ const [isLoading, setIsLoading] = useState(false);
+ const [tokenError] = useState(''); // Optional: You can implement token validation later
+ const { token } = useParams();
+ const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Validate passwords
-    if (password.length < 6) {
-      toast.error('Password must be at least 6 characters');
-      return;
-    }
+ const handleSubmit = async (e) => {
+   e.preventDefault();
 
-    if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
-      return;
-    }
+   if (password.length < 8) {
+     toast.error('Password must be at least 6 characters');
+     return;
+   }
 
-    try {
-      setIsLoading(true);
-      const response = await axios.post(`/api/admin/reset-password/${token}`, { password });
-      
-      if (response.data.success) {
-        toast.success('Password reset successfully! Redirecting to login...');
-        setTimeout(() => navigate('/admin/login'), 2000);
-      } else {
-        toast.error(response.data.message || 'Failed to reset password');
-      }
-    } catch (error) {
-      console.error('Password reset error:', error);
-      toast.error(
-        error.response?.data?.message || 
-        'Failed to reset password. Please try again.'
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
+   if (password !== confirmPassword) {
+     toast.error('Passwords do not match');
+     return;
+   }
 
-  if (tokenError) {
-    return (
-      <div className="reset-password-container">
-        <div className="reset-password-card error-state">
-          <h2>Password Reset Failed</h2>
-          <p className="error-message">{tokenError}</p>
-          <button 
-            onClick={() => navigate('/admin/forgot-password')}
-            className="request-new-link"
-          >
-            Request New Reset Link
-          </button>
-          <button 
-            onClick={() => navigate('/admin/login')}
-            className="back-to-login"
-          >
-            Back to Login
-          </button>
-        </div>
-      </div>
-    );
-  }
+   try {
+     setIsLoading(true);
+     const response = await axios.post(`/api/admin/forgot-password/${token}`, { password });
+     console.log(response.data);
 
-  if (!isValidToken || isLoading) {
-    return (
-      <div className="reset-password-container">
-        <div className="reset-password-card">
-          <h2>Verifying Reset Link...</h2>
-          <div className="loading-spinner"></div>
-        </div>
-      </div>
-    );
-  }
+     if (response.data.success) {
+       toast.success('Password reset successfully! Redirecting to login...');
+       setTimeout(() => navigate('/admin'), 2000);
+     } else {
+       toast.error(response.data.message || 'Failed to reset password');
+     }
+   } catch (error) {
+     console.error('Password reset error:', error);
+     toast.error(error.response?.data?.message || ' Invalid token or Failed to reset password. Please try again.');
+   } finally {
+     setIsLoading(false);
+   }
+ };
 
-  return (
-    <div className="reset-password-container">
-      <div className="reset-password-card">
-        <h2>Reset Your Password</h2>
-        <p>Enter your new password below</p>
-        
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="password">New Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="At least 6 characters"
-              required
-              minLength="6"
-            />
-          </div>
+ if (tokenError) {
+   return (
+     <div className="flex items-center justify-center min-h-screen bg-red-50">
+       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full border border-red-400">
+         <h2 className="text-2xl font-semibold text-red-600 mb-4">Password Reset Failed</h2>
+         <p className="text-red-500 mb-6">{tokenError}</p>
+         <button
+           onClick={() => navigate('/admin/forgot-password')}
+           className="w-full py-2 px-4 bg-red-500 hover:bg-red-600 text-white rounded mb-3"
+         >
+           Request New Reset Link
+         </button>
+         <button
+           onClick={() => navigate('/admin')}
+           className="w-full py-2 px-4 bg-gray-500 hover:bg-gray-600 text-white rounded"
+         >
+           Back to Login
+         </button>
+       </div>
+     </div>
+   );
+ }
 
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Re-enter your new password"
-              required
-              minLength="6"
-            />
-          </div>
+ return (
+   <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+     <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md">
+       <h2 className="text-2xl font-bold text-center text-gray-600 mb-4">Reset Your Password</h2>
+       <p className="text-gray-600 text-sm text-center mb-6">Enter your new password below</p>
 
-          <button 
-            type="submit" 
-            className="submit-button"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Resetting...' : 'Reset Password'}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+       <form onSubmit={handleSubmit} className="space-y-4">
+         <div>
+           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+             New Password
+           </label>
+           <input
+             type="password"
+             id="password"
+             value={password}
+             onChange={(e) => setPassword(e.target.value)}
+             placeholder="At least 8 characters"
+             required
+             minLength="8"
+             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+           />
+         </div>
+
+         <div>
+           <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+             Confirm Password
+           </label>
+           <input
+             type="password"
+             id="confirmPassword"
+             value={confirmPassword}
+             onChange={(e) => setConfirmPassword(e.target.value)}
+             placeholder="Re-enter your new password"
+             required
+             minLength="8"
+             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+           />
+         </div>
+
+         <button
+           type="submit"
+           className={`w-full py-2 px-4 text-white font-semibold rounded ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-700'}`}
+           disabled={isLoading}
+         >
+           {isLoading ? 'Resetting...' : 'Reset Password'}
+         </button>
+       </form>
+     </div>
+   </div>
+ );
 };
 
 export default ResetPassword;
+

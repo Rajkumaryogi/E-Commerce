@@ -12,10 +12,7 @@ export default function Cart() {
     const fetchCart = async () => {
       try {
         const data = await getCart();
-        console.log("Cart data fetched:", data);
-
-        // Handle different response structures
-        if (data && data.items) {
+        if (data?.items) {
           setCart(data.items);
         } else if (Array.isArray(data)) {
           setCart(data);
@@ -23,16 +20,14 @@ export default function Cart() {
           setCart([data]);
         } else {
           setCart([]);
-          console.warn("No cart found");
         }
       } catch (err) {
-        setError("Login require to load cart.");
+        setError("Login required to load cart.");
         console.error("Error fetching cart:", err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchCart();
   }, []);
 
@@ -42,21 +37,20 @@ export default function Cart() {
       setCart(cart.filter(item => item.product._id !== productId));
     } catch (err) {
       console.error("Error removing item:", err);
-      setError("Failed to remove item. Please try again.");
+      setError("Failed to remove item.");
     }
   };
 
   const handleQuantityChange = async (productId, newQuantity) => {
     if (newQuantity < 1) return;
-    
     try {
       await updateCartItem(productId, newQuantity);
-      setCart(cart.map(item => 
+      setCart(cart.map(item =>
         item.product._id === productId ? { ...item, quantity: newQuantity } : item
       ));
     } catch (err) {
       console.error("Error updating quantity:", err);
-      setError("Failed to update quantity. Please try again.");
+      setError("Failed to update quantity.");
     }
   };
 
@@ -87,10 +81,7 @@ export default function Cart() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4">
         <div className="text-2xl font-semibold mb-4">Your cart is empty</div>
-        <Link 
-          to="/collection" 
-          className="bg-black text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
-        >
+        <Link to="/collection" className="bg-black text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition">
           Continue Shopping
         </Link>
       </div>
@@ -101,12 +92,12 @@ export default function Cart() {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Your Shopping Cart</h1>
-        
+
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
           <div className="divide-y divide-gray-200">
-            {cart.map((item) => {
+            {cart.map(item => {
               const product = item.product || item;
-              const price = product.price; // Convert from cents to dollars
+              const price = product.price;
               const totalPrice = (price * item.quantity).toFixed(2);
 
               return (
@@ -118,7 +109,7 @@ export default function Cart() {
                       alt={product.name}
                     />
                   </div>
-                  
+
                   <div className="flex-1">
                     <div className="flex justify-between">
                       <div>
@@ -126,19 +117,13 @@ export default function Cart() {
                         <p className="text-sm text-gray-500">{product.brand}</p>
                       </div>
                       <div className="flex flex-col items-end">
-                        <p className="text-lg font-semibold text-gray-900">
-                          ${totalPrice}
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          ${price.toFixed(2)} × {item.quantity}
-                        </p>
+                        <p className="text-lg font-semibold text-gray-900">₹{totalPrice}</p>
+                        <p className="text-sm text-gray-500">₹{price.toFixed(2)} × {item.quantity}</p>
                       </div>
                     </div>
-                    
-                    <p className="mt-1 text-sm text-gray-500">
-                      {product.description || "No description available"}
-                    </p>
-                    
+
+                    <p className="mt-1 text-sm text-gray-500">{product.description}</p>
+
                     <div className="mt-4 flex flex-wrap items-center gap-3">
                       <div className="flex items-center border border-gray-300 rounded-md">
                         <button
@@ -148,11 +133,7 @@ export default function Cart() {
                         >
                           <FaMinus size={12} />
                         </button>
-                        
-                        <span className="px-4 py-1 text-center w-12">
-                          {item.quantity}
-                        </span>
-                        
+                        <span className="px-4 py-1 w-12 text-center">{item.quantity}</span>
                         <button
                           onClick={() => handleQuantityChange(product._id, item.quantity + 1)}
                           className="px-3 py-1 text-gray-600 hover:bg-gray-100"
@@ -161,7 +142,7 @@ export default function Cart() {
                           <FaPlus size={12} />
                         </button>
                       </div>
-                      
+
                       <Link
                         to={`/products/${product._id}`}
                         className="flex items-center px-3 py-2 text-black hover:text-black border border-black hover:bg-indigo-50 rounded-md transition"
@@ -169,7 +150,7 @@ export default function Cart() {
                         <FaEye className="mr-2" />
                         <span className="text-sm">View Details</span>
                       </Link>
-                      
+
                       <button
                         onClick={() => handleRemoveItem(product._id)}
                         className="flex items-center px-3 py-2 text-red-500 hover:text-red-700 border border-red-500 hover:bg-red-50 rounded-md transition"
@@ -183,27 +164,24 @@ export default function Cart() {
               );
             })}
           </div>
-          
+
           <div className="border-t border-gray-200 px-6 py-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-medium text-gray-900">Order Summary</h3>
-              <p className="text-xl font-semibold text-gray-900">${calculateTotal()}</p>
+              <p className="text-xl font-semibold text-gray-900">₹{calculateTotal()}</p>
             </div>
-            
+
             <div className="mt-6">
               <Link
                 to="/checkout"
-                className="block w-full text-center bg-black border border-transparent rounded-md py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="block w-full text-center bg-black text-white py-3 px-4 rounded-md text-base font-medium hover:bg-indigo-700"
               >
                 Proceed to Checkout
               </Link>
             </div>
-            
+
             <div className="mt-4 flex justify-center">
-              <Link
-                to="/collection"
-                className="text-black hover:text-indigo-500 text-sm font-medium"
-              >
+              <Link to="/collection" className="text-black hover:text-indigo-500 text-sm font-medium">
                 Continue Shopping
               </Link>
             </div>

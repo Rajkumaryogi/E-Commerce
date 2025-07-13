@@ -69,7 +69,7 @@ const Footer = () => {
               <p>Email: info@chlothzy.com</p>
               <p>Phone: (123) 456-7890</p>
             </address>
-            <a href="/admin/login" className="w-full bg-gradient-to-r from-zinc-500 to-zinc-200 text-black font-medium py-3 px-6 rounded-lg flex items-center justify-center">Admin Login</a>
+            <a href="/admin" className="w-full bg-gradient-to-r from-zinc-500 to-zinc-200 text-black font-medium py-3 px-6 rounded-lg flex items-center justify-center">Admin Login</a>
           </div>
         </div>
 
