@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import Login from "./pages/Login";
+import Login from "./pages/login";
 import Cart from "./pages/Cart";
 import Footer from "./components/footer";
 import About from "./pages/About";
