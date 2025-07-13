@@ -3,9 +3,8 @@ import { Link, useLocation } from "react-router-dom"; // Added useLocation
 import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
-import logo from "../assets/logo_C.png";
+import logo from "../assets/logo_c.png";
 import { getCart } from "../services/cartService";
-import { toast } from 'react-toastify';
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 
