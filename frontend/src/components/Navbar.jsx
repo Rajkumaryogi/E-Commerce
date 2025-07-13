@@ -4,6 +4,11 @@ import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 import logo from "../assets/logo_C.png";
+import { getCart } from "../services/cartService";
+import { toast } from 'react-toastify';
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
+
 
 const Navbar = () => {
   const location = useLocation(); // Get current route location
@@ -14,6 +19,7 @@ const Navbar = () => {
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
+  const {cartCount,setCartCount} = useContext(UserContext)
 
   const searchTerms = [
     "Search products...",
@@ -59,6 +65,20 @@ const Navbar = () => {
 
     return () => clearTimeout(timeout);
   }, [currentCharIndex, currentTermIndex, isTyping, isDeleting]);
+
+    const fetchCart = async () => {
+      try {
+        const data = await getCart();        
+        if (data) {
+          setCartCount(data.length);
+        }
+      } catch (err) {
+        console.error("Error fetching cart:", err);
+      }
+    };
+    useEffect(() => {
+      fetchCart();
+    }, []);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -205,7 +225,7 @@ const Navbar = () => {
             >
               <FaShoppingCart size={20} />
               <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                3
+                {cartCount}
               </span>
             </Link>
           </div>

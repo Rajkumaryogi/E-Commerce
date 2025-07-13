@@ -8,33 +8,33 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const data = await getCart();
-        if (data?.items) {
-          setCart(data.items);
-        } else if (Array.isArray(data)) {
-          setCart(data);
-        } else if (data) {
-          setCart([data]);
-        } else {
-          setCart([]);
-        }
-      } catch (err) {
-        setError("Login required to load cart.");
-        console.error("Error fetching cart:", err);
-      } finally {
-        setLoading(false);
+  const fetchCart = async () => {
+    try {
+      const data = await getCart();
+      if (data?.items) {
+        setCart(data.items);
+      } else if (Array.isArray(data)) {
+        setCart(data);
+      } else if (data) {
+        setCart([data]);
+      } else {
+        setCart([]);
       }
-    };
+    } catch (err) {
+      setError("Login required to load cart.");
+      console.error("Error fetching cart:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchCart();
   }, []);
 
   const handleRemoveItem = async (productId) => {
     try {
       await removeFromCart(productId);
-      setCart(cart.filter(item => item.product._id !== productId));
+      fetchCart();
     } catch (err) {
       console.error("Error removing item:", err);
       setError("Failed to remove item.");
@@ -152,7 +152,7 @@ export default function Cart() {
                       </Link>
 
                       <button
-                        onClick={() => handleRemoveItem(product._id)}
+                        onClick={() => handleRemoveItem(item._id)}
                         className="flex items-center px-3 py-2 text-red-500 hover:text-red-700 border border-red-500 hover:bg-red-50 rounded-md transition"
                       >
                         <FaTrash className="mr-2" />

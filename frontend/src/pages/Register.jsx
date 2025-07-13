@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from '../api/axios';
+import API from '../api/axios';
 import { Link} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,7 +14,7 @@ export default function Register() {
     setIsLoading(true);
     try {
       // 1. Register the user
-      const response = await axios.post('/api/auth/register', form);
+      const response = await API.post('/api/auth/register', form);
       console.warn('Registration response:', response);
       
       

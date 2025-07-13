@@ -15,7 +15,7 @@ export const addToCart = async (productId, quantity = 1) => {
 export const removeFromCart = async (productId) => {
   console.warn("removeFromCart called with productId:", productId);
   
-  const response = await API.post('/api/cart/removeFromCart', { productId });
+  const response = await API.delete(`/api/cart/removeFromCart/${productId}`);
   return response.data;
 };
 

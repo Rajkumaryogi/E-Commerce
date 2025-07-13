@@ -52,12 +52,15 @@ const addToCart = async (req, res) => {
 // @desc    Remove item from cart
 // @route   POST /api/cart/removeFromCart
 const removeFromCart = async (req, res) => {
-  const { productId } = req.body;
+  
+  const { productId } = req.params;
+  console.warn(req.params);
   console.warn("removeFromCart called with productId:", productId);
   
 
   try {
     const user = await User.findById(req.user._id);
+    console.log(user.data);
     // Filter out the product to remove
     user.cart = user.cart.filter(
       item => item._id.toString() !== productId

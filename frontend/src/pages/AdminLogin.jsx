@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from '../api/axios';
+import API from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import { useEffect } from 'react';
@@ -24,7 +24,7 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await axios.post('/api/admin/login', form);
+      const res = await API.post('/api/admin/login', form);
       login(res.data.token);
       toast.success('Logged in successfully!');
     } catch (error) {

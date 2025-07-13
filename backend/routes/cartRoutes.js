@@ -6,6 +6,6 @@ const { getCart, addToCart, removeFromCart } = require('../controllers/cartContr
 
 router.get('/',authMiddleware.protect, getCart);
 router.post('/addToCart',authMiddleware.protect, addToCart);
-router.post('/removeFromCart',authMiddleware.protect, removeFromCart);
+router.delete('/removeFromCart/:productId',authMiddleware.protect, removeFromCart);
 
 module.exports = router;

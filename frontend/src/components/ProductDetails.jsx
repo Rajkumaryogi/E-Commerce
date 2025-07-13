@@ -37,7 +37,7 @@ const ProductDetails = () => {
       toast.success(`${quantity} ${product.name} added to cart!`);
     } catch (err) {
       console.error('Error adding to cart:', err);
-      setError('Failed to add item to cart. Please try again.');
+      toast.error('Login to add item to cart.');
     }
   };
 

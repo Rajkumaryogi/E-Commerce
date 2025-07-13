@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
+import API from '../api/axios';
 
 export default function AddProduct() {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function AddProduct() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('/api/products/admin/add', formData, {
+      await API.post('/api/products/admin/add', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

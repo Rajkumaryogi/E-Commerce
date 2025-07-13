@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api/axios';
 import { FaStar, FaFilter, FaSearch } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 
@@ -20,7 +20,7 @@ const Collection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('/api/products');
+        const response = await API.get('/api/products');
         setProducts(response.data);
         setFilteredProducts(response.data);
         setLoading(false);

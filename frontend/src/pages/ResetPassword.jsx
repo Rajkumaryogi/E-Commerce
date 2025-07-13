@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import API from '../api/axios';
 
 const ResetPassword = () => {
  const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ const ResetPassword = () => {
  const handleSubmit = async (e) => {
    e.preventDefault();
 
-   if (password.length < 8) {
+   if (password.length < 6) {
      toast.error('Password must be at least 6 characters');
      return;
    }
@@ -27,7 +27,7 @@ const ResetPassword = () => {
 
    try {
      setIsLoading(true);
-     const response = await axios.post(`/api/admin/forgot-password/${token}`, { password });
+     const response = await API.post(`/api/admin/forgot-password/${token}`, { password });
      console.log(response.data);
 
      if (response.data.success) {
@@ -47,7 +47,7 @@ const ResetPassword = () => {
  if (tokenError) {
    return (
      <div className="flex items-center justify-center min-h-screen bg-red-50">
-       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full border border-red-400">
+       <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full border border-red-400">
          <h2 className="text-2xl font-semibold text-red-600 mb-4">Password Reset Failed</h2>
          <p className="text-red-500 mb-6">{tokenError}</p>
          <button
@@ -69,7 +69,7 @@ const ResetPassword = () => {
 
  return (
    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-     <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md">
+     <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md">
        <h2 className="text-2xl font-bold text-center text-gray-600 mb-4">Reset Your Password</h2>
        <p className="text-gray-600 text-sm text-center mb-6">Enter your new password below</p>
 
@@ -83,9 +83,9 @@ const ResetPassword = () => {
              id="password"
              value={password}
              onChange={(e) => setPassword(e.target.value)}
-             placeholder="At least 8 characters"
+             placeholder="At least 6 characters"
              required
-             minLength="8"
+             minLength="6"
              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
            />
          </div>
@@ -101,7 +101,7 @@ const ResetPassword = () => {
              onChange={(e) => setConfirmPassword(e.target.value)}
              placeholder="Re-enter your new password"
              required
-             minLength="8"
+             minLength="6"
              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
            />
          </div>

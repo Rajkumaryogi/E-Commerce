@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
+import API from '../api/axios';
 import { toast } from 'react-toastify';
 
 export default function AdminProducts() {
@@ -21,7 +21,7 @@ export default function AdminProducts() {
 
       try {
         // Verify admin status
-        const verifyResponse = await axios.get('/api/admin/verify', {
+        const verifyResponse = await API.get('/api/admin/verify', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -31,7 +31,7 @@ export default function AdminProducts() {
         }
 
         // Fetch products
-        const response = await axios.get('/api/products/admin', {
+        const response = await API.get('/api/products/admin', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setProducts(response.data);
@@ -49,7 +49,7 @@ export default function AdminProducts() {
   const handleDelete = async (productId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`/api/products/admin/delete/${productId}`, {
+      await API.delete(`/api/products/admin/delete/${productId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(products.filter(product => product._id !== productId));
@@ -63,7 +63,7 @@ export default function AdminProducts() {
   const toggleVisibility = async (productId, currentVisibility) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.patch(
+      const response = await API.patch(
         `/api/products/admin/${productId}/visibility`,
         { visibility: !currentVisibility },
         { headers: { Authorization: `Bearer ${token}` } }

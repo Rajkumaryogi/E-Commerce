@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../api/axios';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
@@ -11,6 +11,9 @@ import { Link } from 'react-router-dom';
 import image1 from '../assets/image1.png';
 import image2 from '../assets/image2.png';
 import image3 from '../assets/image3.png';
+import { useContext } from 'react';
+import { UserContext } from '../context/userContext';
+
 
 // New Arrivals Slider Component
 const NewArrivalsSlider = () => {
@@ -19,16 +22,16 @@ const NewArrivalsSlider = () => {
     { label: 'Women', image: image1 },
     { label: 'Kids', image: image2 },
   ];
-
+  
   const [index, setIndex] = useState(0);
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % categories.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
-
+  
   return (
     <div className="flex flex-col lg:flex-row h-auto lg:h-[90vh] min-h-[400px] w-full overflow-hidden p-5">
       {/* Left Side Text - Now on top for mobile, left for desktop */}
@@ -118,11 +121,12 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedProduct, setExpandedProduct] = useState(null);
+  const {setCartCount} = useContext(UserContext)
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/products');
+        const response = await API.get('/api/products');
         setProducts(response.data);
       } catch (err) {
         setError(err.message);
@@ -139,6 +143,7 @@ export default function Home() {
   const handleAddToCart = async (productId) => {
     try {
       await addToCart(productId, 1);
+      setCartCount((prev)=>prev+1)
       toast.success('Added to cart!');
     } catch (err) {
       toast.error('Failed to add to cart : Login required');

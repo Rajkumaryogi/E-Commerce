@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import API from '../api/axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,7 +28,7 @@ const Subscribe = () => {
     setIsLoading(true);
     
     try {
-      const response = await axios.post(
+      const response = await API.post(
         `${import.meta.env.VITE_API_URL}/api/newsletter`,
         { email },
         {

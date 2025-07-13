@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams,Link } from 'react-router-dom';
-import axios from '../api/axios';
+import API from '../api/axios';
 
 export default function EditProduct() {
   const { productId:id } = useParams();
@@ -28,7 +28,7 @@ export default function EditProduct() {
     const fetchProduct = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`/api/products/${id}`, {
+        const response = await API.get(`/api/products/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setFormData(response.data);
@@ -59,7 +59,7 @@ export default function EditProduct() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`/api/products/admin/update/${id}`, formData, {
+      await API.put(`/api/products/admin/update/${id}`, formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ export default function EditProduct() {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/api/products/admin/delete/${id}`, {
+      await API.delete(`/api/products/admin/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       navigate('/admin/dashboard', { state: { message: 'Product deleted successfully' } });
