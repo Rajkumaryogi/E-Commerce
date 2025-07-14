@@ -96,6 +96,16 @@ export default function AdminProducts() {
     );
   }
 
+  //handleLogout
+  const handleLogout = () => {
+  const confirmLogout = window.confirm("Are you sure you want to logout?");
+  if (confirmLogout) {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
+};
+
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Admin Header */}
@@ -105,7 +115,7 @@ export default function AdminProducts() {
           <div className="flex items-center space-x-4">
             <span className="text-gray-700">Welcome, {user?.username}</span>
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
             >
               Logout

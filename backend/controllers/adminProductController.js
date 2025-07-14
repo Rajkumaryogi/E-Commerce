@@ -5,7 +5,7 @@ const getAllAdminProducts = async (req, res) => {
     console.warn("rtest");
     try {
         
-        const products = await Product.find();
+        const products = await Product.find().sort({order:1}).lean();
         res.json(products);
     } catch (err) {
         res.status(500).json({ message: err.message });
