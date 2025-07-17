@@ -55,7 +55,7 @@ const verifyAdminUser = async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret');
     const user = await User.findById(decoded.id);
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'To get AdminUser Login : First Logout the user side' });
     }
     res.json({
       _id: user._id,
