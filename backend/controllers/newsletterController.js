@@ -65,7 +65,7 @@ exports.subscribe = async (req, res) => {
 };
 
 async function sendVerificationEmail(subscriber) {
-    const verificationUrl = `${process.env.CLIENT_URL}/verify-subscription?token=${subscriber.verificationToken}`;
+    const verificationUrl = `${process.env.BASE_URL}/api/newsletter/verify?token=${subscriber.verificationToken}`;
     
     const mailOptions = {
         from: `"${process.env.EMAIL_SENDER_NAME}" <${process.env.EMAIL_USER}>`,
