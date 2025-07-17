@@ -5,7 +5,7 @@ import API from '../api/axios';
 import { toast } from 'react-toastify';
 
 export default function AdminProducts() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -188,7 +188,7 @@ export default function AdminProducts() {
                       {product.category}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      ${product.price.toFixed(2)}
+                      ₹{product.price.toFixed(2)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {product.stock}

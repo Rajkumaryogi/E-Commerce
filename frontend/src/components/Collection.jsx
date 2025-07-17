@@ -132,10 +132,10 @@ const Collection = () => {
             onChange={(e) => setFilters({...filters, priceRange: e.target.value})}
           >
             <option value="all">All Prices</option>
-            <option value="0-50">$0 - $50</option>
-            <option value="50-100">$50 - $100</option>
-            <option value="100-200">$100 - $200</option>
-            <option value="200-">$200+</option>
+            <option value="0-50">₹0 - ₹50</option>
+            <option value="50-100">₹50 - ₹100</option>
+            <option value="100-200">₹100 - ₹200</option>
+            <option value="200-">₹200+</option>
           </select>
 
           <select
@@ -175,7 +175,7 @@ const Collection = () => {
                 <Link to={`/product/${product._id}`} className="font-semibold text-gray-900 hover:text-black">
                   {product.name}
                 </Link>
-                <span className="font-bold text-gray-900">${product.price}</span>
+                <span className="font-bold text-gray-900">₹{product.price}</span>
               </div>
               <div className="flex items-center mb-3">
                 <div className="flex text-yellow-400">

@@ -179,7 +179,7 @@ const ProductDetails = () => {
               </div>
 
               <div className="space-y-2">
-                <p className="text-2xl font-semibold text-gray-900">${price}</p>
+                <p className="text-2xl font-semibold text-gray-900">₹{price}</p>
                 {product.stock > 0 ? (
                   <p className="text-green-600">In Stock ({product.stock} available)</p>
                 ) : (

@@ -80,7 +80,7 @@ const Footer = () => {
               <MdOutlineLocalShipping size={24} className="text-indigo-400" />
               <div>
                 <h4 className="font-semibold">Free Shipping</h4>
-                <p className="text-sm text-black">On orders over $50</p>
+                <p className="text-sm text-black">On orders over ₹50</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">

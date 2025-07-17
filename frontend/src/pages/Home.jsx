@@ -246,7 +246,7 @@ export default function Home() {
                   <Link to={`/products/${product._id}`} className="text-lg font-bold text-gray-800 hover:text-black">
                     {product.name}
                   </Link>
-                  <p className="text-lg font-bold text-black">${(product.price).toFixed(2)}</p>
+                  <p className="text-lg font-bold text-black">₹{(product.price).toFixed(2)}</p>
                 </div>
 
                 {product.brand && (
