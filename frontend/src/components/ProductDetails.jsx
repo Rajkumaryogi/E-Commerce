@@ -86,8 +86,8 @@ const ProductDetails = () => {
     );
   }
 
-  // Convert price from cents to dollars
-  const price = (product.price / 100).toFixed(2);
+  // Converted price
+  const price = (product.price).toFixed(2);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
