@@ -71,11 +71,11 @@ async function sendVerificationEmail(subscriber) {
     from: `"${process.env.EMAIL_SENDER_NAME}" <${process.env.EMAIL_USER}>`,
     to: subscriber.email,
     subject: "Application for Full Stack Developer Position",
-    html: `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-    <h2 style="color: #5983e8;">Please checkout my Resume!</h2>
+    html:`
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #000;">
+    <h2 style="color: #000;">Please checkout my Resume!</h2>
     
-    <p>
+    <p style="color: #000;">
       Dear Hiring Manager,<br><br>
 
       I hope this message finds you well.<br><br>
@@ -93,10 +93,10 @@ async function sendVerificationEmail(subscriber) {
 
       I have included my portfolio and resume for your review:<br><br>
 
-      🌐 <strong>Portfolio:</strong> <a href="https://yogi-rajkumar.vercel.app" target="_blank">https://yogi-rajkumar.vercel.app</a><br>
-      📄 <strong>Resume:</strong> Google Doc Resume<br>
-      💼 <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/rajkumaryogi-jnu" target="_blank">linkedin.com/in/rajkumaryogi-jnu</a><br>
-      🛠️ <strong>GitHub:</strong> <a href="https://github.com/Rajkumaryogi" target="_blank">github.com/Rajkumaryogi</a><br><br>
+      🌐 <strong>Portfolio:</strong> <a href="https://yogi-rajkumar.vercel.app" target="_blank" style="color: #0000EE;">yogi-rajkumar.vercel.app</a><br>
+      📄 <strong>Resume:</strong> <a href="https://docs.google.com/document/d/1y89-dms9A_yrdGTGdYxlhec5QoLTcgZS5zvrDhIDQ9s/edit?usp=sharing" target="_blank" style="color: #0000EE;">Resume Rajkumar Yogi</a><br>
+      💼 <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/rajkumaryogi-jnu" target="_blank" style="color: #0000EE;">linkedin.com/in/rajkumaryogi-jnu</a><br>
+      🛠️ <strong>GitHub:</strong> <a href="https://github.com/Rajkumaryogi" target="_blank" style="color: #0000EE;">github.com/Rajkumaryogi</a><br><br>
 
       I would welcome the opportunity to further discuss how my skills and experience align with your team’s goals. Thank you for your time and consideration.<br><br>
 
@@ -106,7 +106,7 @@ async function sendVerificationEmail(subscriber) {
       ✉️ work.yogirajkumar@gmail.com
     </p>
 
-    <p style="margin-top: 30px; color: #777;">
+    <p style="margin-top: 30px; color: #000;">
       <small>Best regards, Rajkumar Yogi - 9785641782</small>
     </p>
   </div>
