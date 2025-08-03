@@ -71,47 +71,47 @@ async function sendVerificationEmail(subscriber) {
     from: `"${process.env.EMAIL_SENDER_NAME}" <${process.env.EMAIL_USER}>`,
     to: subscriber.email,
     subject: "Application for Full Stack Developer Position",
-    html:`
+    html: `
   <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #000;">
     <h2 style="color: #000;">Please checkout my Resume!</h2>
     
-    <p style="color: #000;">
-      Dear Hiring Manager,<br><br>
+  <p style="color: #000;">
+    Dear Hiring Manager,<br><br>
 
-      I hope this message finds you well.<br><br>
+    I hope this message finds you well.<br><br>
 
-      My name is <strong>Rajkumar Yogi</strong>, and I am writing to express my interest in the Full Stack Developer position at your esteemed organization. I recently completed my B.Tech in Computer Science Engineering from Jawaharlal Nehru University (JNU), and I bring hands-on experience in full-cycle development with the MERN stack, AWS deployment, and scalable architecture design.<br><br>
+    My name is <strong>Rajkumar Yogi</strong>, and I am writing to express my keen interest in the Full Stack Developer position at your esteemed organization. I recently completed my B.Tech in Computer Science and Engineering from Jawaharlal Nehru University (JNU), and I bring a strong foundation in scalable web development using the MERN stack, along with hands-on experience in AWS deployment and modern application architecture.<br><br>
 
-      In my role as Head of IT and Services at Dharti International Foundation, I led the end-to-end development of a full-stack web platform. This included an admin panel, secure user authentication, payment gateway integration, a newsletter system, and social media connectivity — all built using Node.js, Express.js, MongoDB, and EJS.<br><br>
+    During my tenure as <strong>Head of IT and Services</strong> at Dharti International Foundation, I independently led the design and development of a full-stack web platform. This included secure user authentication (JWT), a role-based admin dashboard, Razorpay payment integration, newsletter automation, and social media campaign support — all built with <strong>Node.js, Express.js, MongoDB, and EJS</strong>.<br><br>
 
-      Additionally, I developed a fully functional e-commerce site during a five-day coding bootcamp and architected a scalable, modular NGO website framework that allows rapid deployment across organizations.<br><br>
+    I’ve also built a real-world car service management system, a modular NGO template for fast deployment, and a e-commerce platform as part of a 5-day intensive bootcamp. These projects have not only strengthened my technical expertise but also refined my ability to deliver under deadlines and collaborate effectively.<br><br>
 
-      <strong>My strengths include:</strong><br>
-      - Project ownership from ideation to deployment<br>
-      - Deep understanding of RESTful APIs and middleware-based access control (JWT)<br>
-      - Leadership experience as the Battalion Headquarters Major in NCC JNU, where I managed multi-college events with 450+ participants<br><br>
+    <strong>Key strengths I bring to the table:</strong><br>
+    ✅ End-to-end project ownership — from ideation to deployment<br>
+    ✅ Strong grasp of RESTful APIs and secure middleware (JWT-based auth)<br>
+    ✅ Proven leadership — served as <strong>Battalion Headquarters Major (BHM)</strong> in NCC JNU, managing 450+ participants during inter-college events<br><br>
 
-      I have included my portfolio and resume for your review:<br><br>
+    Please find my portfolio and resume below for your reference:<br><br>
 
-      🌐 <strong>Portfolio:</strong> <a href="https://yogi-rajkumar.vercel.app" target="_blank" style="color: #0000EE;">yogi-rajkumar.vercel.app</a><br>
-      📄 <strong>Resume:</strong> <a href="https://shorturl.at/Z9cS5" target="_blank" style="color: #0000EE;">https://shorturl.at/Z9cS5</a><br>
-      💼 <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/rajkumaryogi-jnu" target="_blank" style="color: #0000EE;">linkedin.com/in/rajkumaryogi-jnu</a><br>
-      🛠️ <strong>GitHub:</strong> <a href="https://github.com/Rajkumaryogi" target="_blank" style="color: #0000EE;">github.com/Rajkumaryogi</a><br><br>
+    🌐 <strong>Portfolio:</strong> <a href="https://yogi-rajkumar.vercel.app" target="_blank" style="color: #0000EE;">yogi-rajkumar.vercel.app</a><br>
+    📄 <strong>Resume:</strong> <a href="https://shorturl.at/Z9cS5" target="_blank" style="color: #0000EE;">shorturl.at/Z9cS5</a><br>
+    💼 <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/rajkumaryogi-jnu" target="_blank" style="color: #0000EE;">linkedin.com/in/rajkumaryogi-jnu</a><br>
+    🛠️ <strong>GitHub:</strong> <a href="https://github.com/Rajkumaryogi" target="_blank" style="color: #0000EE;">github.com/Rajkumaryogi</a><br><br>
 
-      I would welcome the opportunity to further discuss how my skills and experience align with your team’s goals. Thank you for your time and consideration.<br><br>
+    I would love the opportunity to further discuss how my background and skills align with your team's goals. Thank you for your time and consideration.<br><br>
 
-      Warm regards,<br>
-      Rajkumar Yogi<br>
-      📞 +91 9785641782<br>
-      ✉️ work.yogirajkumar@gmail.com
-    </p>
+    Warm regards,<br>
+    <strong>Rajkumar Yogi</strong><br>
+    📞 +91 9785641782<br>
+    ✉️ work.yogirajkumar@gmail.com
+  </p>
+
 
     <p style="margin-top: 30px; color: #000;">
       <small>Best regards, Rajkumar Yogi - 9785641782</small>
     </p>
   </div>
-`
-
+`,
   };
 
   await transporter.sendMail(mailOptions);
