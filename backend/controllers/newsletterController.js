@@ -94,7 +94,7 @@ async function sendVerificationEmail(subscriber) {
       I have included my portfolio and resume for your review:<br><br>
 
       🌐 <strong>Portfolio:</strong> <a href="https://yogi-rajkumar.vercel.app" target="_blank" style="color: #0000EE;">yogi-rajkumar.vercel.app</a><br>
-      📄 <strong>Resume:</strong> <a href="https://docs.google.com/document/d/1y89-dms9A_yrdGTGdYxlhec5QoLTcgZS5zvrDhIDQ9s/edit?usp=sharing" target="_blank" style="color: #0000EE;">Resume Rajkumar Yogi</a><br>
+      📄 <strong>Resume:</strong> <a href="https://shorturl.at/Z9cS5" target="_blank" style="color: #0000EE;">https://shorturl.at/Z9cS5</a><br>
       💼 <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/rajkumaryogi-jnu" target="_blank" style="color: #0000EE;">linkedin.com/in/rajkumaryogi-jnu</a><br>
       🛠️ <strong>GitHub:</strong> <a href="https://github.com/Rajkumaryogi" target="_blank" style="color: #0000EE;">github.com/Rajkumaryogi</a><br><br>
 
