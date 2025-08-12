@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "main": "index.js",
   "type": "module",
   "dependencies": {
     "dotenv": "^17.2.1",
