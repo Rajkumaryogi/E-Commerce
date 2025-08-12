@@ -1,63 +1,81 @@
-const express = require('express');
-const connectDB = require('./config/database');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-require("dotenv").config();
-const morgan = require('morgan');
-
-
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
+import cookieParser from "cookie-parser";
+import morgan from "morgan";
+import helmet from "helmet";
+import compression from "compression";
+import rateLimit from "express-rate-limit";
+import connectDB from "./config/connectDB.js";
+// Import routes
+// import productRoutes from "./routes/productRoutes.js";
+// import newsletterRoutes from "./routes/newsletterRoutes.js";
+// import authRoutes from "./routes/authRoutes.js";
+// import cartRoutes from "./routes/cartRoutes.js";
+// import adminRoutes from "./routes/adminRoutes.js";
 const app = express();
+const PORT = process.env.PORT || 3000;
+// Enhanced CORS configuration
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://e-commerce-theta-coral-19.vercel.app",
+  "https://rajchlothzy.vercel.app",
+];
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+// Middleware
+app.set("trust proxy", 1);
+app.use(express.json({ limit: "10kb" }));
+app.use(cookieParser());
+app.use(compression());
+app.use(morgan("dev"));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  })
+);
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
+app.use(limiter);
 
 // Database connection
 connectDB();
-
-// Import routes AFTER middleware
-const productRoutes = require('./routes/productRoutes');
-const newsletterRoutes = require('./routes/newsletterRoutes');
-const authRoutes = require('./routes/authRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-// const userRoutes = require('./routes/userRoutes');
-const adminRoutes = require('./routes/adminRoutes');
-
-
-// Enhanced CORS configuration
-const corsOptions = {
-  origin: ['http://localhost:5173','https://e-commerce-theta-coral-19.vercel.app','https://rajchlothzy.vercel.app'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-};
-
-// Middleware
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(cookieParser());
-
-app.use(morgan('dev'));
-
-
 // Basic health check route
-app.get('/', (req, res) => {
-  res.send('Server is running');
+app.get("/", (req, res) => {
+  res.send("Server is running");
 });
-
-
-
 // Mount routes with proper paths
-app.use('/api/products', productRoutes);
-app.use('/api/newsletter', newsletterRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/cart', cartRoutes);
-// app.use('/api/users', userRoutes);
-app.use('/api/admin', adminRoutes);
-
+// app.use("/api/products", productRoutes);
+// app.use("/api/newsletter", newsletterRoutes);
+// app.use("/api/auth", authRoutes);
+// app.use("/api/cart", cartRoutes);
+// app.use("/api/admin", adminRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: 'Internal Server Error' });
+  res.status(500).json({ message: "Internal Server Error" });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// Start server in all environments
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error);
+  }
+};
+
+startServer();
+// Export for Vercel serverless function
+export default app;
