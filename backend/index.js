@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
-// Load environment variables - works with dotenv@17.2.1
 dotenv.config();
 
 const app = express();

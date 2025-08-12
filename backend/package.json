@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "dependencies": {
+    "debug": "^4.4.1",
     "dotenv": "^17.2.1",
     "express": "^4.21.2"
   },
